@@ -1,6 +1,8 @@
+/** @type { import("drizzle-kit").Config } */
 export default {
-  schema: "./schema.ts",
-  driver: "mysql2",
+  schema: "./src/utils/schema.js",
+  dialect: "mysql",
+  out: "./drizzle",
   dbCredentials: {
     host: process.env.DB_HOST_NAME,
     user: process.env.DB_USER_NAME,
