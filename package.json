@@ -7,11 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:push":"npx drizzle-kit push",
-    "db:studio":"npx drizzle-kit studio"
+    "db:push": "npx drizzle-kit push",
+    "db:studio": "npx drizzle-kit studio"
   },
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^2.3.6",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-select": "^2.1.1",
+    "@radix-ui/react-slot": "^1.1.0",
+    "axios": "^1.7.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.33.0",
@@ -23,7 +27,9 @@
     "npx": "^10.2.2",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.53.0",
     "shadcn-ui": "^0.8.0",
+    "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7"
   },
