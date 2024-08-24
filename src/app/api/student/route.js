@@ -28,3 +28,17 @@ export async function GET(req) {
     return NextResponse.json(error);
   }
 }
+
+export async function DELETE(req){
+    try {
+        const searchParams = req.nextUrl.searchParams;
+        const id = searchParams.get('id');
+
+        const result = await db.delete(STUDENTS).where(eq(STUDENTS.id,id));
+
+        return NextResponse.json(result);
+
+    } catch (error) {
+         return NextResponse.json(error);
+    }
+}

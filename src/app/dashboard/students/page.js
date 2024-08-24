@@ -29,7 +29,7 @@ function Student() {
             <AddNewStudent></AddNewStudent>
         </h2>
 
-        <StudentListTable allStudentList={allStudentList}></StudentListTable>
+        <StudentListTable allStudentList={allStudentList} refreshData={allStudentList}></StudentListTable>
        
     </div>
   )
