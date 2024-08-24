@@ -9,7 +9,7 @@ function Dashboard({children}) {
             <SideNav></SideNav>
         </div>
         <div className='md:ml-64'>
-        <Header></Header>
+         <Header></Header>
         {children}
         </div>
         

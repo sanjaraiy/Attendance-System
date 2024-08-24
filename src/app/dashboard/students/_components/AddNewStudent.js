@@ -41,11 +41,11 @@ function AddNewStudent() {
   const getAllStandardsList = () => {
    GlobalApi.getAllStandards()
     .then((res) => {
-        console.log(res.data.result);
-        setGrade(res.data.result);
+        console.log(res.data);
+        setGrade(res.data);
     })
     .catch((err) => {
-        console.log(err.message);
+        console.log(err);
         
     })
   }
@@ -56,13 +56,15 @@ function AddNewStudent() {
     GlobalApi.createNewStudent(data)
     .then((res) => {
        console.log("created Student successfully", res);
-       if(res.data){
+       if(res.data.result){
          reset();
          setOpen(false);
          toast("New Student Added successfully!")
         }
 
         setLoading(false);
+    }).catch((err) =>{
+        console.log("error: ", err);
     })
   };
 
