@@ -86,7 +86,7 @@ function AddNewStudent() {
                   <Input type='text' placeholder="Enter your full Name" {...register('fullname', { required: true })} />
                 </div>
                 <div className="py-2">
-                  <Input type='number' placeholder="Enter your phone no" {...register('phone', { required: true })} />
+                  <Input type='phone' placeholder="Enter your phone no" {...register('phone', { required: true })} />
                 </div>
                 <div className="py-2">
                   <Input type='text' placeholder="Enter your address" {...register('address', { required: true })} />

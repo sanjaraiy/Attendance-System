@@ -1,17 +1,33 @@
+"use client"
+
 import MonthSelection from "@/app/_components/MonthSelection";
 import StandardSelect from "@/app/_components/StandardSelect";
 import { Button } from "@/components/ui/button";
-import { LogIn } from "lucide-react";
-import React from "react";
+import GlobalApi from '@/app/_services/GlobalApi';
+
+import React, { useState } from "react";
+import moment from "moment/moment";
+import AttendanceGrid from "./_components/AttendanceGrid";
 
 function Attendance() {
 
   const [selectedMonth, setSelectedMonth] = useState();
   const [selectedGrade, setSelectedGrade] = useState();
+  const [attendanceList, setAttendanceList] = useState();
 
+
+  // Used to fetch attendance list for give month and Grade
  const onSearchHandler = () => {
     console.log(selectedMonth, selectedGrade);
+    const month = moment(selectedMonth).format('MM/YYYY');
+    console.log(month);
     
+    GlobalApi.getAttendanceList(selectedGrade, month)
+    .then((res) => {
+        console.log(res.data);
+        setAttendanceList(res.data);
+        
+    })
  }
 
 
@@ -23,15 +39,16 @@ function Attendance() {
       <div className="flex gap-4 my-3 p-3 shadow-sm border rounded-lg">
         <div className="flex gap-2 items-center">
           <label>Select Month:</label>
-          <MonthSelection selectedMonth={(value) => setSelectedMonth(value)}></MonthSelection>
+          <MonthSelection setSelectedMonth={setSelectedMonth}></MonthSelection>
         </div>
         <div className="flex gap-2 items-center">
           <label>Select Standard:</label>
-          <StandardSelect selectedGrade={(value) => setSelectedGrade(value)}></StandardSelect>
+          <StandardSelect setSelectedGrade={setSelectedGrade}></StandardSelect>
         </div>
         <Button onClick = {() => onSearchHandler()}>Search</Button>
       </div>
       {/* Student Attendance Grid */}
+      <AttendanceGrid attendanceList={attendanceList} selectedMonth={selectedMonth}></AttendanceGrid>
     </div>
   );
 }

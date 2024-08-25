@@ -5,6 +5,7 @@ const createNewStudent = async (data) => await axios.post('/api/student', data);
 const getAllStudents = async () => await axios.get('/api/student');
 const deleteStudentRecord = async (id) => await axios.delete('/api/student?id='+id);
 
+const getAttendanceList = async (standard, month) => await axios.get('/api/attendance?standard='+standard+"&month="+month);
 
 
 module.exports = {
@@ -12,4 +13,5 @@ module.exports = {
     createNewStudent,
     getAllStudents,
     deleteStudentRecord,
+    getAttendanceList
 };
