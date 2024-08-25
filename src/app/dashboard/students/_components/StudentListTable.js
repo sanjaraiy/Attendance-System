@@ -67,6 +67,7 @@ function StudentListTable({ allStudentList, refreshData }) {
 
   const [rowData, setRowData] = useState();
   const [searchInput, setSearchInput] = useState();
+  
   useEffect(() => {
     allStudentList && setRowData(allStudentList);
   }, [allStudentList]);
