@@ -9,6 +9,7 @@ import moment from "moment";
 import StatusList from "./_components/StatusList";
 import { set } from "react-hook-form";
 import BarChart from "./_components/BarChart";
+import PieChart from "./_components/PieChart";
 
 function Dashboard() {
   const { setTheme } = useTheme();
@@ -17,17 +18,17 @@ function Dashboard() {
   const [attendanceList, setAttendanceList] = useState();
   const [totalPresentData, setTotalPresentData] = useState([]);
 
-  useEffect(() => {
-    // setTheme("light");
-    getAllStudentAttendance();
-    getTotalPresentCountByDay();
-  }, [selectedGrade]);
+  // useEffect(() => {
+  //   // setTheme("light");
+  //   getAllStudentAttendance();
+  //   getTotalPresentCountByDay();
+  // }, [selectedGrade]);
 
   useEffect(() => {
     // setTheme("light");
-    getAllStudentAttendance();
     getTotalPresentCountByDay();
-  }, [selectedMonth]);
+    getAllStudentAttendance();
+  }, [selectedMonth || selectedGrade]);
 
   /**
    * 
@@ -73,9 +74,12 @@ function Dashboard() {
 
       <StatusList attendanceList={attendanceList}></StatusList>
 
-      <div className="grid grid-cols-1 md:grid-cols-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <div className="md:col-span-2">
           <BarChart attendanceList={attendanceList} totalPresentData={totalPresentData}></BarChart>
+        </div>
+        <div>
+           <PieChart attendanceList={attendanceList}></PieChart>
         </div>
       </div>
     </div>
