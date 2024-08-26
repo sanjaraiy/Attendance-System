@@ -21,14 +21,9 @@ try {
         attendanceId:ATTENDANCE.id
       })
       .from(STUDENTS)
-      .leftJoin(ATTENDANCE,eq(STUDENTS.id, ATTENDANCE.studentId))
+      .leftJoin(ATTENDANCE,and (eq(STUDENTS.id, ATTENDANCE.studentId), eq(ATTENDANCE.date, month)))
       .where(eq(STUDENTS.standard, standard))
-      .where(
-        or(
-          eq(ATTENDANCE.date, month),
-          isNull(ATTENDANCE.date),
-        )
-      )
+     
     
       return NextResponse.json(result);
 } catch (error) {
