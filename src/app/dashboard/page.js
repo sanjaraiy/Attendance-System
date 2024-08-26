@@ -8,22 +8,25 @@ import GlobalApi from '@/app/_services/GlobalApi';
 import moment from "moment";
 import StatusList from "./_components/StatusList";
 import { set } from "react-hook-form";
+import BarChart from "./_components/BarChart";
 
 function Dashboard() {
   const { setTheme } = useTheme();
   const [selectedMonth, setSelectedMonth] = useState();
   const [selectedGrade, setSelectedGrade] = useState();
   const [attendanceList, setAttendanceList] = useState();
-
+  const [totalPresentData, setTotalPresentData] = useState([]);
 
   useEffect(() => {
     // setTheme("light");
     getAllStudentAttendance();
+    getTotalPresentCountByDay();
   }, [selectedGrade]);
 
   useEffect(() => {
     // setTheme("light");
     getAllStudentAttendance();
+    getTotalPresentCountByDay();
   }, [selectedMonth]);
 
   /**
@@ -42,6 +45,20 @@ function Dashboard() {
      })
   }
 
+ const getTotalPresentCountByDay = () => {
+  GlobalApi.totalPresentCountByDay(moment(selectedMonth).format('MM/yyyy'),selectedGrade)
+  .then((res)=>{
+    // console.log(res.data);
+    setTotalPresentData(res.data);
+  })
+  .catch((error) => {
+    console.log(error);
+    
+  })
+ }
+
+
+
 
   return (
     <div className="p-10">
@@ -55,6 +72,12 @@ function Dashboard() {
       </div>
 
       <StatusList attendanceList={attendanceList}></StatusList>
+
+      <div className="grid grid-cols-1 md:grid-cols-3">
+        <div className="md:col-span-2">
+          <BarChart attendanceList={attendanceList} totalPresentData={totalPresentData}></BarChart>
+        </div>
+      </div>
     </div>
   );
 }

@@ -11,6 +11,7 @@ const markingAttendance = async (data) => await axios.post('/api/attendance', da
 
 const markingAbsent = async (studentId, day, date) => await  axios.delete('/api/attendance?studentId='+studentId+'&day='+day+'&date='+date);
 
+const totalPresentCountByDay = async (date, standard) => await axios.get('/api/dashboard?date='+date+"&standard="+standard);
 module.exports = {
     getAllStandards,
     createNewStudent,
@@ -19,4 +20,5 @@ module.exports = {
     getAttendanceList,
     markingAttendance,
     markingAbsent,
+    totalPresentCountByDay,
 };
