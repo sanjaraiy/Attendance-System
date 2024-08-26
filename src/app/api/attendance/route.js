@@ -1,6 +1,6 @@
 import { db } from "@/utils";
 import { ATTENDANCE, STUDENTS } from "@/utils/schema";
-import { isNull, or } from "drizzle-orm";
+import { eq, isNull, or } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export async function GET(req){
@@ -34,4 +34,46 @@ try {
 } catch (error) {
      return NextResponse.json(error);
 }
+}
+
+export async function POST(req, res){
+  try {
+      const data = await req.json();
+      const result = await db.insert(ATTENDANCE)
+      .values({
+        studentId:data.studentId,
+        present:data.present,
+        day:data.day,
+        date:data.date,
+      })
+  
+      return NextResponse.json(result);
+  } catch (error) {
+      return NextResponse.json(error);
+  }
+
+}
+
+export async function DELETE(req){
+
+ try {
+   const searchParams = await req.nextUrl.searchParams;
+   const studentId = searchParams.get('stduentId');
+   const date = searchParams.get('date');
+   const day = searchParams.get('day');
+ 
+   const result = await db.delete(ATTENDANCE)
+   .where(
+    and(
+      eq(ATTENDANCE.studentId, studentId),
+      eq(ATTENDANCE.day, day),
+      eq(ATTENDANCE.date, date),
+    )
+   )
+  
+ 
+   return NextResponse.json(result);
+ } catch (error) {
+     return NextResponse.json(error);
+ }
 }

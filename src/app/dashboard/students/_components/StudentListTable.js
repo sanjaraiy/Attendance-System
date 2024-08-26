@@ -106,8 +106,8 @@ function StudentListTable({ allStudentList, refreshData }) {
         <AgGridReact
           rowData={rowData}
           columnDefs={colDefs}
-          pagination={pagination}
           quickFilterText={searchInput}
+          pagination={pagination}
           paginationPageSize={paginationPageSize}
           paginationPageSizeSelector={paginationPageSizeSelector}
         />
